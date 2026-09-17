@@ -9,7 +9,7 @@ import path from "node:path";
 
 const dataRepo = process.env.TOOL_RADAR_DATA_REPO;
 if (!dataRepo || !path.isAbsolute(dataRepo)) throw new Error("Set TOOL_RADAR_DATA_REPO to an absolute path.");
-const read = (name) => JSON.parse(await readFile(path.join(dataRepo, "data", name), "utf8"));
+const read = async (name) => JSON.parse(await readFile(path.join(dataRepo, "data", name), "utf8"));
 
 const pending = await read("pending.json");
 const summaries = await read("summaries.json");
