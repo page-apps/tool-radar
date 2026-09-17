@@ -1,0 +1,71 @@
+---
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#f7f6f3" />
+    <meta name="description" content="Release notes from your favourite tools, filtered through your preferences." />
+    <title>Tool Radar</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="./">Tool <span>Radar</span></a>
+      <div class="header-actions">
+        <div class="connection" data-status data-tone="idle"><span class="status-dot"></span><span><strong data-status-label>Private reader</strong><small data-status-detail>Connect to load your radar</small></span></div>
+        <button class="button button-ghost" type="button" data-disconnect hidden>Disconnect</button>
+        <button class="button button-dark" type="button" data-connect>Connect GitHub</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="locked" data-locked>
+        <div class="locked-copy">
+          <p class="eyebrow">Private tool intelligence</p>
+          <h1>What changed in the tools you care about.</h1>
+          <p class="lede">A deterministic pipeline checks official release feeds every night. Only when something actually ships does a coding agent summarise it against your preferences.</p>
+          <div class="locked-actions"><button class="button button-accent" type="button" data-connect>Open private reader</button></div>
+        </div>
+        <aside class="sample-stack" aria-label="How it works">
+          <div class="sample-card"><span>01</span><div><strong>Deterministic check</strong><p>Release notes come straight from each tool's official GitHub feed. No model, no guessing.</p></div></div>
+          <div class="sample-card"><span>02</span><div><strong>Agent only on change</strong><p>If nothing new shipped, nothing happens. The coding agent is billed only for real releases.</p></div></div>
+          <div class="sample-card"><span>03</span><div><strong>Your preferences</strong><p>Summaries lead with the change that matters to you, stored in your private data repository.</p></div></div>
+        </aside>
+      </section>
+
+      <section class="reader" data-reader hidden>
+        <p class="radar-updated" data-radar-updated></p>
+        <section class="schedule-panel" data-schedule></section>
+        <div class="filter-bar" data-filter-bar>
+          <label class="search"><span class="sr-only">Search tools</span><input type="search" placeholder="Search tools and interests" data-search /></label>
+          <span class="filter-count"><span data-count>0</span> tools</span>
+        </div>
+        <div class="tool-list" data-tools></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Tool Radar</p>
+      <p>Deterministic release checks · coding-agent summaries only on change · stored in your private GitHub repository</p>
+    </footer>
+
+    <dialog class="connect-dialog" data-connect-dialog>
+      <div class="dialog-title"><div><p class="eyebrow">Owner access</p><h2>Open your private radar</h2></div><button type="button" data-dialog-close aria-label="Close connection dialog">×</button></div>
+      <p>Use a fine-grained, expiring PAT limited to <code>page-apps/tool-radar-data</code> with <strong>Contents: read</strong>. It is sent only to GitHub's API.</p>
+      <div class="shared-option" data-shared-option hidden><strong>A Page Apps PAT is available</strong><p>Using it registers this app on the shared <code>page-apps.github.io</code> browser origin.</p><button class="button button-accent" type="button" data-use-shared>Use shared Page Apps PAT</button><div class="or"><span>or use a separate token</span></div></div>
+      <form data-token-form>
+        <label class="field"><span>Personal access token</span><div class="token-input"><input type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…" data-token required /><button type="button" data-token-toggle>Show</button></div></label>
+        <fieldset><legend>Keep this token</legend><label><input type="radio" name="persistence" value="session" checked /> This browser tab <small>Recommended</small></label><label><input type="radio" name="persistence" value="memory" /> Until refresh</label><label><input type="radio" name="persistence" value="local" /> On this device</label></fieldset>
+        <p class="security-note">Persistent browser tokens can be read by malicious same-origin code, browser extensions or an XSS vulnerability. Prefer tab-only access on a trusted personal device.</p>
+        <p class="form-error" data-connect-error role="alert"></p><button class="button button-dark button-wide" type="submit">Verify and open reader</button>
+      </form>
+    </dialog>
+
+    <script>
+      import "../lib/app";
+    </script>
+  </body>
+</html>

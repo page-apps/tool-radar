@@ -1,0 +1,32 @@
+{
+  "_comment": "Example of the private data repository's data/tools.json. Copy it there and edit — the public site never contains your real configuration.",
+  "preferences": {
+    "interests": [
+      "agent frameworks and orchestration",
+      "editor and terminal integrations",
+      "reliability, evaluation and observability",
+      "local and self-hosted deployment"
+    ],
+    "summaryStyle": "concise-analytical",
+    "english": "australian",
+    "maxHighlightsPerTool": 3
+  },
+  "tools": [
+    {
+      "id": "caddy",
+      "name": "Caddy",
+      "website": "https://caddyserver.com",
+      "repository": "caddyserver/caddy",
+      "why": "Automatic-HTTPS reverse proxy for everything I host.",
+      "interests": ["local and self-hosted deployment"]
+    },
+    {
+      "id": "t3-code",
+      "name": "T3 Code",
+      "website": "https://t3.chat",
+      "repository": null,
+      "why": "Closed-source tool without a GitHub release feed.",
+      "interests": ["agent frameworks and orchestration"]
+    }
+  ]
+}

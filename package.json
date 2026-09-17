@@ -1,0 +1,24 @@
+{
+  "name": "tool-radar",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.19.0",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "fetch:releases": "node scripts/fetch-releases.mjs",
+    "agent": "bash scripts/run-agent.sh",
+    "validate:data": "node ../tool-radar-data/scripts/validate-data.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.14.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.9.2"
+  }
+}
