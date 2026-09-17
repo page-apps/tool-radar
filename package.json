@@ -7,7 +7,7 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/validate-pwa.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "fetch:releases": "node scripts/fetch-releases.mjs",

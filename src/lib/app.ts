@@ -13,8 +13,39 @@ const $ = <T extends Element>(selector: string): T => {
   return node;
 };
 
-const dateFormatter = new Intl.DateTimeFormat("en-AU", { day: "numeric", month: "short", year: "numeric" });
-const timeFormatter = new Intl.DateTimeFormat("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Australia/Sydney", timeZoneName: "short" });
+interface InstallPromptEvent extends Event {
+  prompt(): Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
+}
+
+let installPrompt: InstallPromptEvent | null = null;
+const installButton = document.querySelector<HTMLButtonElement>("[data-install]");
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  installPrompt = event as InstallPromptEvent;
+  installButton?.removeAttribute("hidden");
+});
+installButton?.addEventListener("click", () => {
+  if (!installPrompt) return;
+  void installPrompt.prompt().then(() => installPrompt?.userChoice).finally(() => {
+    installPrompt = null;
+    installButton.setAttribute("hidden", "");
+  });
+});
+window.addEventListener("appinstalled", () => {
+  installPrompt = null;
+  installButton?.setAttribute("hidden", "");
+});
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    const appBase = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+    void navigator.serviceWorker.register(`${appBase}service-worker.js`, { scope: appBase })
+      .catch((error) => console.warn("Tool Radar could not enable offline mode.", error));
+  });
+}
+
+const dateFormatter = new Intl.DateTimeFormat("en-AU", { day: "numeric", month: "short", year: "numeric" });const timeFormatter = new Intl.DateTimeFormat("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Australia/Sydney", timeZoneName: "short" });
 const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;" })[character] ?? character);
 const shortDate = (value: string | null) => (value ? dateFormatter.format(new Date(value)) : "unknown date");
 

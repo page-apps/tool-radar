@@ -7,8 +7,15 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="theme-color" content="#f7f6f3" />
+    <meta name="theme-color" content="#17231d" />
     <meta name="description" content="Release notes from your favourite tools, filtered through your preferences." />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Tool Radar" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png" />
     <title>Tool Radar</title>
   </head>
   <body>
@@ -16,6 +23,7 @@ import "../styles/global.css";
       <a class="wordmark" href="./">Tool <span>Radar</span></a>
       <div class="header-actions">
         <div class="connection" data-status data-tone="idle"><span class="status-dot"></span><span><strong data-status-label>Private reader</strong><small data-status-detail>Connect to load your radar</small></span></div>
+        <button class="button button-ghost" type="button" data-install hidden>Install app</button>
         <button class="button button-ghost" type="button" data-disconnect hidden>Disconnect</button>
         <button class="button button-dark" type="button" data-connect>Connect GitHub</button>
       </div>
